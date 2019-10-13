@@ -20,7 +20,7 @@ function getWeather() {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
+        // console.log(response)
 
         $('#w-location').text(response.name)
         $('#w-day').text(moment().format('(MM/DD/YYYY)'))
@@ -35,6 +35,19 @@ function getWeather() {
 }
 
 function getForcast() {
+
+    let city = 'Denver';
+    let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
+    let queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city},us&units=imperial&APPID=${apikey}`
+    // let queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
+    console.log(queryURL);
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response)
+    })
 
     for (let i = 0; i < 5; i++) {
         $('.card-title-' + i).text(moment().add(i, 'days').format('MM/DD/YYYY'))
