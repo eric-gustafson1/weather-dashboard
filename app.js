@@ -51,6 +51,8 @@ function getForcast() {
         for (let i = 1; i < 6; i++) {
 
             $('.w-icon-' + i).attr('src', `http://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`)
+            $('.w-temp-' + i).text(`Temp: ${Math.floor(response.list[i].main.temp_max)}°F`)
+            $('.w-humidity-' + i).text(`Humidity: ${Math.floor(response.list[i].main.humidity)}%`)
         }
 
     })
