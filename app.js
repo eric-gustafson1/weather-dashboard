@@ -1,10 +1,6 @@
-// const ui = new UI();
-// const storage = new Storage()
-// const weatherLocation = storage.getLocationData()
-// const weather = new Weather(weatherLocation.city);
-
 $(document).ready(function () {
     getWeather()
+    getForcast()
 });
 
 $('#w-change-btn').on('click', function () {
@@ -35,4 +31,13 @@ function getWeather() {
         $('#w-wind').text(`Wind Speed: ${response.wind.speed} mph`)
         $('#w-uvIndex').text('UV Index:')
     })
+
+}
+
+function getForcast() {
+
+    for (let i = 0; i < 5; i++) {
+        $('.card-title-' + i).text(moment().add(i, 'days').format('MM/DD/YYYY'))
+
+    }
 }
