@@ -2,12 +2,12 @@ class UI {
     constructor() {
         this.location = $('#w-location');
         this.day = $('#w-day')
-        this.desc = $('#w-desc');
         this.temp = $('#w-temp');
         this.icon = $('#w-icon');
         this.humidity = $('#w-humidity');
         this.hiLow = $('#w-hiLow');
         this.wind = $('#w-wind');
+        // this.uvi = $('w-uvIndex')
 
     }
 
@@ -20,6 +20,7 @@ class UI {
         $(this.humidity).text(`Relative Humidity: ${weather.main.temp}%`)
         $(this.hiLow).text(`Today's Low: ${Math.floor(weather.main.temp_min)}°F / High: ${Math.floor(weather.main.temp_max)}°F`)
         $(this.wind).text(`Wind Speed: ${weather.wind.speed} mph`)
+        // $(this.uvi).text('test')
 
     }
 }

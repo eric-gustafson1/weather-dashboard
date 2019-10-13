@@ -1,6 +1,6 @@
 class Storage {
     constructor() {
-        // this.city = city
+        this.city = city
         this.defaultCity = 'Highlands Ranch'
     }
 
