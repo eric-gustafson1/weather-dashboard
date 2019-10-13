@@ -29,10 +29,10 @@ function getWeather() {
         $('#w-location').text(response.name)
         $('#w-day').text(moment().format('(MM/DD/YYYY)'))
         $('#w-icon').attr('src', `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`)
-        // $('#w-desc').text(response.weather[0].description)
         $('#w-temp').text('Tempurature: ' + Math.floor(response.main.temp) + '°F with ' + response.weather[0].description)
-        $('#w-humidity').text(`Relative Humidity: ${response.main.temp}%`)
         $('#w-hiLow').text(`Today's Low: ${Math.floor(response.main.temp_min)}°F / High: ${Math.floor(response.main.temp_max)}°F`)
+        $('#w-humidity').text(`Relative Humidity: ${response.main.temp}%`)
         $('#w-wind').text(`Wind Speed: ${response.wind.speed} mph`)
+        $('#w-uvIndex').text('UV Index:')
     })
 }
