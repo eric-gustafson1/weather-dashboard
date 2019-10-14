@@ -99,5 +99,12 @@ function getForcast() {
 
 $('#w-search').on('click', function () {
     console.log($('#input').val())
-    getWeather($('#input').val())
+    let city = $('#input').val()
+    getWeather(city)
+
+    // <button type="button" class="btn btn-outline-info">Info</button>
+    let cityBtn = $('<button>').text(city)
+    cityBtn.addClass('btn btn-outline-info btn-block')
+    $('.cities').append(cityBtn)
+
 })
