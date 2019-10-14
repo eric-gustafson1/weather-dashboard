@@ -77,7 +77,7 @@ function getForcast() {
     let city = 'Denver';
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
     // let queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city},us&units=imperial&APPID=${apikey}`
-    let queryURL = `http://api.openweathermap.org/data/2.5/forecast/daily?q=${city},us&units=imperial&APPID=${apikey}&cnt=5`
+    let queryURL = `http://api.openweathermap.org/data/2.5/forecast/?q=${city},us&units=imperial&APPID=${apikey}`
 
     $.ajax({
         url: queryURL,
@@ -85,19 +85,33 @@ function getForcast() {
     }).then(function (response) {
         console.log(response)
 
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 40; i++) {
 
-            $('.w-icon-' + i).attr('src', `http://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`)
-            $('.w-tempHi-' + i).text(`Temp: ${Math.floor(response.list[i].main.temp_max)}°F`)
-            $('.w-humidity-' + i).text(`Humidity: ${Math.floor(response.list[i].main.humidity)}%`)
-            // $('.w-humidity-' + i).text(`dt_txt ${response.list[i].dt_txt}`)
+            let day = moment().add(i, 'days').format('YYYY-MM-DD') + ' 21:00:00'
+            response.list.forEach(function (data) {
+                // console.log(data.dt_txt)
+                if (data.dt_txt === day) {
+                    let forcastDay = data.dt_txt
+
+                    $('.card-title-' + i).text(forcastDay)
+                    $('.w-icon-' + i).attr('src', `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
+                    $('.w-tempHi-' + i).text(`Temp: ${Math.floor(data.main.temp_max)}°F`)
+                    $('.w-humidity-' + i).text(`Humidity: ${Math.floor(data.main.humidity)}%`)
+
+                    console.log('hit')
+                }
+            })
+
+
         }
 
-    })
-    for (let i = 1; i < 6; i++) {
-        $('.card-title-' + i).text(moment().add(i, 'days').format('MM/DD/YYYY'))
 
-    }
+
+    })
+    // for (let i = 1; i < 6; i++) {
+    //     $('.card-title-' + i).text(moment().add(i, 'days').format('MM/DD/YYYY'))
+
+    // }
 
 }
 
