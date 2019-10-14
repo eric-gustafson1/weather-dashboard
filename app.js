@@ -17,11 +17,11 @@ $('#w-search').on('click', function () {
     $('#input').val('')
     getWeather(city)
 
-    cityArr.push(city)
-    console.log(cityArr)
-    saveCity(city)
-
-    createCityBtns(city)
+    if (city !== '') {
+        cityArr.push(city)
+        saveCity(city)
+        createCityBtns(city)
+    }
 })
 
 function getWeather(city) {
@@ -59,6 +59,7 @@ function getUVIndex(lat, lon) {
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
     let latitude = lat
     let longitude = lon
+    // console.log(lat, lon)
     let queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apikey}&lat=${latitude}&lon=${longitude}`
 
     $.ajax({
@@ -75,13 +76,14 @@ function getForcast() {
 
     let city = 'Denver';
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
-    let queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city},us&units=imperial&APPID=${apikey}`
+    // let queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city},us&units=imperial&APPID=${apikey}`
+    let queryURL = `http://api.openweathermap.org/data/2.5/forecast/daily?q=${city},us&units=imperial&APPID=${apikey}&cnt=5`
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        // console.log(response)
+        console.log(response)
 
         for (let i = 1; i < 6; i++) {
 
@@ -89,15 +91,6 @@ function getForcast() {
             $('.w-tempHi-' + i).text(`Temp: ${Math.floor(response.list[i].main.temp_max)}°F`)
             $('.w-humidity-' + i).text(`Humidity: ${Math.floor(response.list[i].main.humidity)}%`)
             // $('.w-humidity-' + i).text(`dt_txt ${response.list[i].dt_txt}`)
-        }
-
-        for (let j = 0; j < 40; j++) {
-
-            if (response.list[j].dt_txt === '2019') {
-
-                console.log(response.list[j].dt_txt)
-            }
-
         }
 
     })
@@ -127,8 +120,11 @@ function loadCities() {
 }
 
 function createCityBtns(city) {
-    let cityBtn = $('<button>').text(city)
-    cityBtn.addClass('btn btn-outline-info btn-block')
-    cityBtn.attr('data-city', city)
-    $('.cities').append(cityBtn)
+    if (city !== '') {
+
+        let cityBtn = $('<button>').text(city)
+        cityBtn.addClass('btn btn-outline-info btn-block')
+        cityBtn.attr('data-city', city)
+        $('.cities').append(cityBtn)
+    }
 }
