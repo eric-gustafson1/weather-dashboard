@@ -1,9 +1,7 @@
 $(document).ready(function () {
     let city
-    getWeather(city)
-    // console.log(city)
-    getForcast()
     loadCities()
+    getWeather(city)
 });
 
 
@@ -27,20 +25,18 @@ $('#w-search').on('click', function () {
 function getWeather(city) {
     if (city === undefined || city === '') {
 
-        city = 'Highlands Ranch';
+        city = 'Denver';
     } else {
         city = city
     }
-    // console.log(city)
+    getForcast(city)
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
     let queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
-    // console.log(queryURL);
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        // console.log(response);
 
         $('#w-location').text(response.name);
         $('#w-day').text(moment().format('(MM/DD/YYYY)'));
@@ -72,47 +68,34 @@ function getUVIndex(lat, lon) {
 
 }
 
-function getForcast() {
+function getForcast(city) {
 
-    let city = 'Denver';
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
-    // let queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city},us&units=imperial&APPID=${apikey}`
     let queryURL = `http://api.openweathermap.org/data/2.5/forecast/?q=${city},us&units=imperial&APPID=${apikey}`
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
 
         for (let i = 1; i < 40; i++) {
 
             let day = moment().add(i, 'days').format('YYYY-MM-DD') + ' 21:00:00'
+
             response.list.forEach(function (data) {
-                // console.log(data.dt_txt)
                 if (data.dt_txt === day) {
                     let forcastDay = data.dt_txt
 
                     $('.card-title-' + i).text(forcastDay)
+                    $('.card-title-' + i).text(moment(forcastDay).format('MM/DD/YYYY'))
+
                     $('.w-icon-' + i).attr('src', `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
                     $('.w-tempHi-' + i).text(`Temp: ${Math.floor(data.main.temp_max)}°F`)
                     $('.w-humidity-' + i).text(`Humidity: ${Math.floor(data.main.humidity)}%`)
-
-                    console.log('hit')
                 }
             })
-
-
         }
-
-
-
     })
-    // for (let i = 1; i < 6; i++) {
-    //     $('.card-title-' + i).text(moment().add(i, 'days').format('MM/DD/YYYY'))
-
-    // }
-
 }
 
 
