@@ -3,14 +3,12 @@ $(document).ready(function () {
     getForcast()
 });
 
-let lat,
-    lon
 
 $('#w-change-btn').on('click', function () {
     weather.changeLocation($('#city').val());
     getWeather();
     $('#locModal').modal('hide');
-    storage.setLocationData($('#city').val())
+    storage.setLocationData($('#city').val());
 })
 
 function getWeather() {
@@ -23,24 +21,22 @@ function getWeather() {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        // console.log(response)
+        // console.log(response);
 
-        $('#w-location').text(response.name)
-        $('#w-day').text(moment().format('(MM/DD/YYYY)'))
-        $('#w-icon').attr('src', `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`)
-        $('#w-temp').text('Tempurature: ' + Math.floor(response.main.temp) + '°F with ' + response.weather[0].description)
-        $('#w-hiLow').text(`Today's Low: ${Math.floor(response.main.temp_min)}°F / High: ${Math.floor(response.main.temp_max)}°F`)
-        $('#w-humidity').text(`Relative Humidity: ${response.main.temp}%`)
-        $('#w-wind').text(`Wind Speed: ${response.wind.speed} mph`)
+        $('#w-location').text(response.name);
+        $('#w-day').text(moment().format('(MM/DD/YYYY)'));
+        $('#w-icon').attr('src', `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
+        $('#w-temp').text('Tempurature: ' + Math.floor(response.main.temp) + '°F with ' + response.weather[0].description);
+        $('#w-humidity').text(`Relative Humidity: ${response.main.temp}%`);
+        $('#w-wind').text(`Wind Speed: ${response.wind.speed} mph`);
 
-        lat = response.coord.lat
-        lon = response.coord.lon
+        let lat = response.coord.lat;
+        let lon = response.coord.lon;
         getUVIndex(lat, lon)
     })
 }
 
 function getUVIndex(lat, lon) {
-    console.log(lat, lon)
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
     let latitude = lat
     let longitude = lon
@@ -51,7 +47,6 @@ function getUVIndex(lat, lon) {
         method: "GET"
     }).then(function (response) {
 
-        // console.log(response)
         $('#w-uvIndex').text(response.value)
     })
 
@@ -74,7 +69,15 @@ function getForcast() {
             $('.w-icon-' + i).attr('src', `http://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`)
             $('.w-tempHi-' + i).text(`Temp: ${Math.floor(response.list[i].main.temp_max)}°F`)
             // $('.w-humidity-' + i).text(`Humidity: ${Math.floor(response.list[i].main.humidity)}%`)
-            $('.w-humidity-' + i).text(`dt_ text ${response.list[i].dt}`)
+            $('.w-humidity-' + i).text(`dt_txt ${response.list[i].dt_txt}`)
+        }
+
+        for (let j = 0; j < 40; j++) {
+
+            if (response.list[j].dt_txt === '2019') {
+
+            }
+            console.log(response.list[j].dt_txt)
         }
 
     })
