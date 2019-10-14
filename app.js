@@ -11,8 +11,8 @@ $('#w-change-btn').on('click', function () {
     storage.setLocationData($('#city').val());
 })
 
-function getWeather() {
-    let city = 'Highlands Ranch';
+function getWeather(city) {
+    city = 'Highlands Ranch';
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
     let queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
     // console.log(queryURL);
@@ -76,8 +76,9 @@ function getForcast() {
 
             if (response.list[j].dt_txt === '2019') {
 
+                console.log(response.list[j].dt_txt)
             }
-            console.log(response.list[j].dt_txt)
+
         }
 
     })
