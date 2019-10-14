@@ -1,5 +1,7 @@
 $(document).ready(function () {
-    getWeather()
+    let city
+    getWeather(city)
+    console.log(city)
     getForcast()
 });
 
@@ -12,7 +14,13 @@ $('#w-change-btn').on('click', function () {
 })
 
 function getWeather(city) {
-    city = 'Highlands Ranch';
+    if (city === undefined || city === '') {
+
+        city = 'Highlands Ranch';
+    } else {
+        city = city
+    }
+    console.log(city)
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
     let queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
     // console.log(queryURL);
@@ -68,8 +76,8 @@ function getForcast() {
 
             $('.w-icon-' + i).attr('src', `http://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`)
             $('.w-tempHi-' + i).text(`Temp: ${Math.floor(response.list[i].main.temp_max)}°F`)
-            // $('.w-humidity-' + i).text(`Humidity: ${Math.floor(response.list[i].main.humidity)}%`)
-            $('.w-humidity-' + i).text(`dt_txt ${response.list[i].dt_txt}`)
+            $('.w-humidity-' + i).text(`Humidity: ${Math.floor(response.list[i].main.humidity)}%`)
+            // $('.w-humidity-' + i).text(`dt_txt ${response.list[i].dt_txt}`)
         }
 
         for (let j = 0; j < 40; j++) {
@@ -88,3 +96,8 @@ function getForcast() {
     }
 
 }
+
+$('#w-search').on('click', function () {
+    console.log($('#input').val())
+    getWeather($('#input').val())
+})
