@@ -1,7 +1,7 @@
 $(document).ready(function () {
     let city
     getWeather(city)
-    console.log(city)
+    // console.log(city)
     getForcast()
     loadCities()
 });
@@ -12,11 +12,16 @@ $('.cities').on('click', 'button', function () {
     getWeather(city)
 })
 
-$('#w-change-btn').on('click', function () {
-    weather.changeLocation($('#city').val());
-    getWeather();
-    $('#locModal').modal('hide');
-    storage.setLocationData($('#city').val());
+$('#w-search').on('click', function () {
+    let city = $('#input').val()
+    $('#input').val('')
+    getWeather(city)
+
+    cityArr.push(city)
+    console.log(cityArr)
+    saveCity(city)
+
+    createCityBtns(city)
 })
 
 function getWeather(city) {
@@ -26,7 +31,7 @@ function getWeather(city) {
     } else {
         city = city
     }
-    console.log(city)
+    // console.log(city)
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
     let queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
     // console.log(queryURL);
@@ -103,18 +108,6 @@ function getForcast() {
 
 }
 
-$('#w-search').on('click', function () {
-    let city = $('#input').val()
-    getWeather(city)
-
-    cityArr.push(city)
-    console.log(cityArr)
-    saveCity(city)
-
-    createCityBtns(city)
-
-
-})
 
 function saveCity(city) {
     localStorage.setItem('cityList', JSON.stringify(cityArr))
