@@ -5,6 +5,7 @@ $(document).ready(function () {
     getForcast()
 });
 
+let cityArr = []
 
 $('#w-change-btn').on('click', function () {
     weather.changeLocation($('#city').val());
@@ -101,6 +102,9 @@ $('#w-search').on('click', function () {
     console.log($('#input').val())
     let city = $('#input').val()
     getWeather(city)
+
+    cityArr.push(city)
+    console.log(cityArr)
 
     // <button type="button" class="btn btn-outline-info">Info</button>
     let cityBtn = $('<button>').text(city)
