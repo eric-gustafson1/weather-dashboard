@@ -3,9 +3,12 @@ $(document).ready(function () {
     getWeather(city)
     console.log(city)
     getForcast()
+    loadCities()
 });
 
-let cityArr = []
+// let cityArr = []
+
+
 
 $('#w-change-btn').on('click', function () {
     weather.changeLocation($('#city').val());
@@ -105,10 +108,33 @@ $('#w-search').on('click', function () {
 
     cityArr.push(city)
     console.log(cityArr)
+    saveCity(city)
 
-    // <button type="button" class="btn btn-outline-info">Info</button>
+    createCityBtns(city)
+
+
+})
+
+function saveCity(city) {
+    localStorage.setItem('cityList', JSON.stringify(cityArr))
+
+}
+
+function loadCities() {
+
+    if (localStorage.getItem('cityList') === null) {
+        cityArr = []
+    } else {
+
+        cityArr = JSON.parse(localStorage.getItem('cityList'))
+        cityArr.forEach(function (city) {
+            createCityBtns(city)
+        })
+    }
+}
+
+function createCityBtns(city) {
     let cityBtn = $('<button>').text(city)
     cityBtn.addClass('btn btn-outline-info btn-block')
     $('.cities').append(cityBtn)
-
-})
+}
