@@ -37,7 +37,7 @@ function getWeather(city) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-
+        // console.log(response)
         $('#w-location').text(response.name);
         $('#w-day').text(moment().format('(MM/DD/YYYY)'));
         $('#w-icon').attr('src', `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
@@ -55,7 +55,6 @@ function getUVIndex(lat, lon) {
     let apikey = '14d09a756bf3ab9066ec4aca0c409bb6';
     let latitude = lat
     let longitude = lon
-    // console.log(lat, lon)
     let queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apikey}&lat=${latitude}&lon=${longitude}`
 
     $.ajax({
@@ -65,7 +64,6 @@ function getUVIndex(lat, lon) {
 
         $('#w-uvIndex').text(response.value)
     })
-
 }
 
 function getForcast(city) {
@@ -86,9 +84,10 @@ function getForcast(city) {
                 if (data.dt_txt === day) {
                     let forcastDay = data.dt_txt
 
-                    $('.card-title-' + i).text(forcastDay)
+                    // $('.card-title-' + i).text(forcastDay)
+                    $('.card-day-' + i).text(moment(forcastDay).format('dddd'))
                     $('.card-title-' + i).text(moment(forcastDay).format('MM/DD/YYYY'))
-
+                    // $('.card-title-' + i).text(moment(forcastDay).format('dddd'))
                     $('.w-icon-' + i).attr('src', `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
                     $('.w-tempHi-' + i).text(`Temp: ${Math.floor(data.main.temp_max)}°F`)
                     $('.w-humidity-' + i).text(`Humidity: ${Math.floor(data.main.humidity)}%`)
