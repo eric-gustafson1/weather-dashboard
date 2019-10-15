@@ -1,7 +1,6 @@
 $(document).ready(function () {
-    let city
     loadCities()
-    getWeather(city)
+    getWeather()
 });
 
 
@@ -24,7 +23,6 @@ $('#w-search').on('click', function () {
 
 function getWeather(city) {
     if (city === undefined || city === '') {
-
         city = 'Denver';
     } else {
         city = city
