@@ -13,8 +13,10 @@ $("#w-search").on("click", function() {
   let city = $("#input").val();
   city = city.replace(/[0-9]/g, "");
   $("#input").val("");
-  getWeather(city);
   event.preventDefault();
+  if (city !== "") {
+    getWeather(city);
+  }
 });
 
 function getWeather(city) {
