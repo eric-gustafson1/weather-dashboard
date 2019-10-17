@@ -1,6 +1,9 @@
 $(document).ready(function() {
   loadCities();
   getWeather();
+  $(".alert").animate({
+    opacity: 0.01
+  });
 });
 
 $(".cities").on("click", "button", function() {
@@ -9,14 +12,26 @@ $(".cities").on("click", "button", function() {
 });
 
 $("#w-search").on("click", function() {
-  console.log("in not numbers");
   let city = $("#input").val();
-  city = city.replace(/[0-9]/g, "");
+  city = city.replace(/[^A-Za-z]/g, "");
   $("#input").val("");
-  event.preventDefault();
   if (city !== "") {
     getWeather(city);
+  } else {
+    $(".alert").text(
+      'Enter a valid city name. Example: "Chicago". No numbers or special characters.'
+    );
+    $(".alert").animate({
+      opacity: 0.9
+    });
+    $(".alert").animate(
+      {
+        opacity: 0.01
+      },
+      5000
+    );
   }
+  event.preventDefault();
 });
 
 function getWeather(city) {
@@ -33,7 +48,16 @@ function getWeather(city) {
     method: "GET",
     statusCode: {
       404: function() {
-        console.log("code 404 ");
+        $(".alert").text(`The city named "${city}" was not found`);
+        $(".alert").animate({
+          opacity: 0.9
+        });
+        $(".alert").animate(
+          {
+            opacity: 0.01
+          },
+          5000
+        );
       },
       200: function(response) {
         $("#w-location").text(response.name);
