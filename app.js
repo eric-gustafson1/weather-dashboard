@@ -6,6 +6,8 @@ $(document).ready(function() {
   });
 });
 
+const apikey = "14d09a756bf3ab9066ec4aca0c409bb6";
+
 $(".cities").on("click", "button", function() {
   city = $(this).attr("data-city");
   getWeather(city);
@@ -40,7 +42,6 @@ function getWeather(city) {
   } else {
     city = city.toLowerCase();
   }
-  let apikey = "14d09a756bf3ab9066ec4aca0c409bb6";
   let queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
 
   $.ajax({
@@ -91,7 +92,6 @@ function getWeather(city) {
 }
 
 function getUVIndex(lat, lon) {
-  let apikey = "14d09a756bf3ab9066ec4aca0c409bb6";
   let latitude = lat;
   let longitude = lon;
   let queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apikey}&lat=${latitude}&lon=${longitude}`;
@@ -105,7 +105,6 @@ function getUVIndex(lat, lon) {
 }
 
 function getForcast(city) {
-  let apikey = "14d09a756bf3ab9066ec4aca0c409bb6";
   let queryURL = `http://api.openweathermap.org/data/2.5/forecast/?q=${city},us&units=imperial&APPID=${apikey}`;
 
   $.ajax({
@@ -122,10 +121,8 @@ function getForcast(city) {
         if (data.dt_txt === day) {
           let forcastDay = data.dt_txt;
 
-          // $('.card-title-' + i).text(forcastDay)
           $(".card-day-" + i).text(moment(forcastDay).format("dddd"));
           $(".card-title-" + i).text(moment(forcastDay).format("MM/DD/YYYY"));
-          // $('.card-title-' + i).text(moment(forcastDay).format('dddd'))
           $(".w-icon-" + i).attr(
             "src",
             `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
