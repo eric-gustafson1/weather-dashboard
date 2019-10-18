@@ -13,7 +13,6 @@ $(".cities").on("click", "button", function() {
 
 $("#w-search").on("click", function() {
   let city = $("#input").val();
-  //   city = city.replace(/[^A-Za-z]/g, "");
   city = city.replace(/[0-9]/g, "");
   $("#input").val("");
 
@@ -106,6 +105,12 @@ function getForcast(city) {
       if (!forcastDayArr.includes(forcastDay)) {
         forcastDayArr.push(forcastDay);
       }
+    }
+
+    const today = moment().format("YYYY-MM-DD");
+    if (forcastDayArr.includes(today)) {
+      const index = forcastDayArr.indexOf(today);
+      forcastDayArr.splice(index, 1);
     }
 
     for (let j = 0; j < forcastDayArr.length; j++) {
