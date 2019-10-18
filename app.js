@@ -13,7 +13,8 @@ $(".cities").on("click", "button", function() {
 
 $("#w-search").on("click", function() {
   let city = $("#input").val();
-  city = city.replace(/[^A-Za-z]/g, "");
+  //   city = city.replace(/[^A-Za-z]/g, "");
+  city = city.replace(/[0-9]/g, "");
   $("#input").val("");
 
   if (city !== "") {
@@ -152,5 +153,6 @@ function createCityBtns(city) {
   let cityBtn = $("<button>").text(city);
   cityBtn.addClass("btn btn-outline-info btn-block");
   cityBtn.attr("data-city", city);
+
   $(".cities").append(cityBtn);
 }
