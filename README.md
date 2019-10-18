@@ -34,4 +34,4 @@ UI makes use of bootswatch Lux theme.
 
 # Link to Project on Github
 
-[weather-dashboard](https://eric-gustafson1.github.io/day-planner/))
+[weather-dashboard](https://eric-gustafson1.github.io/day-planner/)
