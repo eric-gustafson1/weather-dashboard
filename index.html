@@ -1,112 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/lux/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/lux/bootstrap.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
     <title>Weather Dashboard</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a href="/" class="navbar-brand mx-auto text-center">Weather Dashboard</a>
+      <a href="/" class="navbar-brand mx-auto text-center">Weather Dashboard</a>
     </nav>
 
-    <div class="alert alert-warning" role="alert">
-
-    </div>
+    <div class="alert alert-warning" role="alert"></div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <h3 class="mt-4">City Search</h3>
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" placeholder="City" id="input">
-                    <button type="submit" class="btn btn-info p-3" id="w-search"><i class="fas fa-search"></i></button>
-                </div>
-                <div class="cities"></div>
-            </div>
-            <div class="col-9">
-                <!--Nested row-->
-                <div class="row">
-                    <div class="col-12">
-                        <h3><span id="w-location"></span> <span id="w-day"></span><span><img id="w-icon"></span></h3>
-                        <ul class="list-group mt-0">
-                            <li class="list-group-item border-0" id="w-temp"></li>
-                            <li class="list-group-item border-0" id="w-humidity"></li>
-                            <li class="list-group-item border-0" id="w-wind"></li>
-                            <li class="list-group-item border-0">UV Index: <span class="badge badge-danger"
-                                    id="w-uvIndex"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!--Nested rows-->
-                <div class="row">
-                    <div class="col-12">
-                        <h3>5-Day Forcast</h3>
-                        <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
-                            <div class="card-body">
-                                <h6 class="card-title card-day-1"></h6>
-                                <h5 class="card-title card-title-1"></h5>
-                                <img class="w-icon-1">
-                                <p class="w-tempHi-1"></p>
-                                <p class="w-humidity-1"></p>
-                            </div>
-                        </div>
-                        <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
-                            <div class="card-body">
-                                <h6 class="card-title card-day-2"></h6>
-                                <h5 class="card-title card-title-2"></h5>
-                                <img class="w-icon-2">
-                                <p class="w-tempHi-2"></p>
-                                <p class="w-humidity-2"></p>
-                            </div>
-                        </div>
-                        <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
-                            <div class="card-body">
-                                <h6 class="card-title card-day-3"></h6>
-                                <h5 class="card-title card-title-3"></h5>
-                                <img class="w-icon-3">
-                                <p class="w-tempHi-3"></p>
-                                <p class="w-humidity-3"></p>
-                            </div>
-                        </div>
-                        <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
-                            <div class="card-body">
-                                <h6 class="card-title card-day-4"></h6>
-                                <h5 class="card-title card-title-4"></h5>
-                                <img class="w-icon-4">
-                                <p class="w-tempHi-4"></p>
-                                <p class="w-humidity-4"></p>
-                            </div>
-                        </div>
-                        <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
-                            <div class="card-body">
-                                <h6 class="card-title card-day-5"></h6>
-                                <h5 class="card-title card-title-5"></h5>
-                                <img class="w-icon-5">
-                                <p class="w-tempHi-5"></p>
-                                <p class="w-humidity-5"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-3">
+          <h3 class="mt-4">City Search</h3>
+          <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="City" id="input" />
+            <button type="submit" class="btn btn-info p-3" id="w-search">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          <div class="cities"></div>
         </div>
+        <div class="col-9">
+          <!--Nested row-->
+          <div class="row">
+            <div class="col-12">
+              <h3>
+                <span id="w-location"></span> <span id="w-day"></span><span><img id="w-icon"/></span>
+              </h3>
+              <ul class="list-group mt-0">
+                <li class="list-group-item border-0" id="w-temp"></li>
+                <li class="list-group-item border-0" id="w-humidity"></li>
+                <li class="list-group-item border-0" id="w-wind"></li>
+                <li class="list-group-item border-0">
+                  UV Index:
+                  <span class="badge badge-danger" id="w-uvIndex"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!--Nested rows-->
+          <div class="row">
+            <div class="col-12">
+              <h3>5-Day Forecast</h3>
+              <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
+                <div class="card-body">
+                  <h6 class="card-title card-day-0"></h6>
+                  <h5 class="card-title card-title-0"></h5>
+                  <img class="w-icon-0" />
+                  <p class="w-tempHi-0"></p>
+                  <p class="w-humidity-0"></p>
+                </div>
+              </div>
+              <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
+                <div class="card-body">
+                  <h6 class="card-title card-day-1"></h6>
+                  <h5 class="card-title card-title-1"></h5>
+                  <img class="w-icon-1" />
+                  <p class="w-tempHi-1"></p>
+                  <p class="w-humidity-1"></p>
+                </div>
+              </div>
+              <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
+                <div class="card-body">
+                  <h6 class="card-title card-day-2"></h6>
+                  <h5 class="card-title card-title-2"></h5>
+                  <img class="w-icon-2" />
+                  <p class="w-tempHi-2"></p>
+                  <p class="w-humidity-2"></p>
+                </div>
+              </div>
+              <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
+                <div class="card-body">
+                  <h6 class="card-title card-day-3"></h6>
+                  <h5 class="card-title card-title-3"></h5>
+                  <img class="w-icon-3" />
+                  <p class="w-tempHi-3"></p>
+                  <p class="w-humidity-3"></p>
+                </div>
+              </div>
+              <div class="card text-white bg-info mb-3" style="max-width: 10rem;">
+                <div class="card-body">
+                  <h6 class="card-title card-day-4"></h6>
+                  <h5 class="card-title card-title-4"></h5>
+                  <img class="w-icon-4" />
+                  <p class="w-tempHi-4"></p>
+                  <p class="w-humidity-4"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="app.js"></script>
-</body>
-
+  </body>
 </html>

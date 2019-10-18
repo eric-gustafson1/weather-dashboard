@@ -1,12 +1,10 @@
 $(document).ready(function() {
   loadCities();
   getWeather();
-  $(".alert").animate({
-    opacity: 0.01
-  });
+  $(".alert").animate({ opacity: 0.01 });
 });
-
 const apikey = "14d09a756bf3ab9066ec4aca0c409bb6";
+const forcastApiKey = "b1b15e88fa797225412429c1c50c122a1";
 
 $(".cities").on("click", "button", function() {
   city = $(this).attr("data-city");
@@ -17,15 +15,12 @@ $("#w-search").on("click", function() {
   let city = $("#input").val();
   city = city.replace(/[^A-Za-z]/g, "");
   $("#input").val("");
+
   if (city !== "") {
     getWeather(city);
   } else {
-    $(".alert").text(
-      'Enter a valid city name. Example: "Chicago". No numbers or special characters.'
-    );
-    $(".alert").animate({
-      opacity: 0.9
-    });
+    $(".alert").text('Enter a valid city name. Example: "Chicago". Do not include numbers or special characters.');
+    $(".alert").animate({ opacity: 0.9 });
     $(".alert").animate(
       {
         opacity: 0.01
@@ -42,7 +37,7 @@ function getWeather(city) {
   } else {
     city = city.toLowerCase();
   }
-  let queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
+  const queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
 
   $.ajax({
     url: queryURL,
@@ -63,16 +58,8 @@ function getWeather(city) {
       200: function(response) {
         $("#w-location").text(response.name);
         $("#w-day").text(moment().format("(MM/DD/YYYY)"));
-        $("#w-icon").attr(
-          "src",
-          `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`
-        );
-        $("#w-temp").text(
-          "Tempurature: " +
-            Math.floor(response.main.temp) +
-            "°F with " +
-            response.weather[0].description
-        );
+        $("#w-icon").attr("src", `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
+        $("#w-temp").text("Tempurature: " + Math.floor(response.main.temp) + "°F with " + response.weather[0].description);
         $("#w-humidity").text(`Relative Humidity: ${response.main.temp}%`);
         $("#w-wind").text(`Wind Speed: ${response.wind.speed} mph`);
 
@@ -92,9 +79,9 @@ function getWeather(city) {
 }
 
 function getUVIndex(lat, lon) {
-  let latitude = lat;
-  let longitude = lon;
-  let queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apikey}&lat=${latitude}&lon=${longitude}`;
+  const latitude = lat;
+  const longitude = lon;
+  const queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apikey}&lat=${latitude}&lon=${longitude}`;
 
   $.ajax({
     url: queryURL,
@@ -105,34 +92,43 @@ function getUVIndex(lat, lon) {
 }
 
 function getForcast(city) {
-  let queryURL = `http://api.openweathermap.org/data/2.5/forecast/?q=${city},us&units=imperial&APPID=${apikey}`;
+  const queryURL = `http://api.openweathermap.org/data/2.5/forecast/?q=${city},us&units=imperial&APPID=${apikey}`;
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
+    let forcastDayArr = [];
+
     for (let i = 1; i < 40; i++) {
-      let day =
-        moment()
-          .add(i, "days")
-          .format("YYYY-MM-DD") + " 21:00:00";
+      let forcastDay = moment(response.list[i].dt_txt).format("YYYY-MM-DD");
+      if (!forcastDayArr.includes(forcastDay)) {
+        forcastDayArr.push(forcastDay);
+      }
+    }
 
-      response.list.forEach(function(data) {
-        if (data.dt_txt === day) {
-          let forcastDay = data.dt_txt;
+    for (let j = 0; j < forcastDayArr.length; j++) {
+      let maxTempArr = [];
+      let temps = [];
+      let max = 0;
 
-          $(".card-day-" + i).text(moment(forcastDay).format("dddd"));
-          $(".card-title-" + i).text(moment(forcastDay).format("MM/DD/YYYY"));
-          $(".w-icon-" + i).attr(
-            "src",
-            `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-          );
-          $(".w-tempHi-" + i).text(`Temp: ${Math.floor(data.main.temp_max)}°F`);
-          $(".w-humidity-" + i).text(
-            `Humidity: ${Math.floor(data.main.humidity)}%`
-          );
+      for (let k = 0; k < 40; k++) {
+        let forcastDay = moment(response.list[k].dt_txt).format("YYYY-MM-DD");
+
+        if (forcastDayArr[j] === forcastDay) {
+          const tempurature = response.list[k].main.temp;
+
+          if (tempurature > max) {
+            max = tempurature;
+
+            $(".card-day-" + j).text(moment(forcastDayArr[j]).format("dddd"));
+            $(".card-title-" + j).text(moment(forcastDayArr[j]).format("MM/DD/YYYY"));
+            $(".w-icon-" + j).attr("src", `http://openweathermap.org/img/wn/${response.list[k].weather[0].icon}@2x.png`);
+            $(".w-tempHi-" + j).text(`Temp: ${Math.floor(max)}°F`);
+            $(".w-humidity-" + j).text(`Humidity: ${Math.floor(response.list[k].main.humidity)}%`);
+          }
         }
-      });
+      }
     }
   });
 }
