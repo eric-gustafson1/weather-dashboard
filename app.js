@@ -127,9 +127,12 @@ function getForcast(city) {
           if (tempurature > max) {
             max = tempurature;
 
+            icon = response.list[k].weather[0].icon;
+            icon = icon.replace(/n/g, "d");
+
             $(".card-day-" + j).text(moment(forcastDayArr[j]).format("dddd"));
             $(".card-title-" + j).text(moment(forcastDayArr[j]).format("MM/DD/YYYY"));
-            $(".w-icon-" + j).attr("src", `http://openweathermap.org/img/wn/${response.list[k].weather[0].icon}@2x.png`);
+            $(".w-icon-" + j).attr("src", `http://openweathermap.org/img/wn/${icon}@2x.png`);
             $(".w-tempHi-" + j).text(`Temp: ${Math.floor(max)}°F`);
             $(".w-humidity-" + j).text(`Humidity: ${Math.floor(response.list[k].main.humidity)}%`);
           }
