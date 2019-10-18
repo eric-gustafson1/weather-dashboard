@@ -16,21 +16,21 @@ UI makes use of bootswatch Lux theme.
 
 ### Current weather features
 
-.*City
-.*Date
-.*Icon image (visual representation of weather conditions)
-.*Temperature
-.*Humidity
-.*Wind speed
-.\*UV index
+.._ City
+.._ Date
+.._ Icon image (visual representation of weather conditions)
+.._ Temperature
+.._ Humidity
+.._ Wind speed
+..\* UV index
 
 ### Forecast weather features
 
-.*Day of the week
-.*Date
-.*Icon image (visual representation of weather conditions)
-.*High tempurature for the day
-.\*Humidity
+.._ Day of the week
+.._ Date
+.._ Icon image (visual representation of weather conditions)
+.._ High tempurature for the day
+..\* Humidity
 
 # Link to Project on Github
 
