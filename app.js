@@ -37,7 +37,7 @@ function getWeather(city) {
   } else {
     city = city.toLowerCase();
   }
-  const queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
+  const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apikey}`;
 
   $.ajax({
     url: queryURL,
@@ -58,7 +58,7 @@ function getWeather(city) {
       200: function(response) {
         $("#w-location").text(response.name);
         $("#w-day").text(moment().format("(MM/DD/YYYY)"));
-        $("#w-icon").attr("src", `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
+        $("#w-icon").attr("src", `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
         $("#w-temp").text("Tempurature: " + Math.floor(response.main.temp) + "°F with " + response.weather[0].description);
         $("#w-humidity").text(`Relative Humidity: ${response.main.temp}%`);
         $("#w-wind").text(`Wind Speed: ${response.wind.speed} mph`);
@@ -81,7 +81,7 @@ function getWeather(city) {
 function getUVIndex(lat, lon) {
   const latitude = lat;
   const longitude = lon;
-  const queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apikey}&lat=${latitude}&lon=${longitude}`;
+  const queryURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${apikey}&lat=${latitude}&lon=${longitude}`;
 
   $.ajax({
     url: queryURL,
@@ -92,7 +92,7 @@ function getUVIndex(lat, lon) {
 }
 
 function getForcast(city) {
-  const queryURL = `http://api.openweathermap.org/data/2.5/forecast/?q=${city},us&units=imperial&APPID=${apikey}`;
+  const queryURL = `https://api.openweathermap.org/data/2.5/forecast/?q=${city},us&units=imperial&APPID=${apikey}`;
 
   $.ajax({
     url: queryURL,
@@ -132,7 +132,7 @@ function getForcast(city) {
 
             $(".card-day-" + j).text(moment(forcastDayArr[j]).format("dddd"));
             $(".card-title-" + j).text(moment(forcastDayArr[j]).format("MM/DD/YYYY"));
-            $(".w-icon-" + j).attr("src", `http://openweathermap.org/img/wn/${icon}@2x.png`);
+            $(".w-icon-" + j).attr("src", `https://openweathermap.org/img/wn/${icon}@2x.png`);
             $(".w-tempHi-" + j).text(`Temp: ${Math.floor(max)}°F`);
             $(".w-humidity-" + j).text(`Humidity: ${Math.floor(response.list[k].main.humidity)}%`);
           }
